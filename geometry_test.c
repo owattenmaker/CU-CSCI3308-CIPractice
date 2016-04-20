@@ -14,6 +14,7 @@
 #include <check.h>
 
 #include "geometry.h"
+
 /* coord_2d area test */ 
 START_TEST(test_2d_area_triangle)
 {
@@ -21,9 +22,9 @@ START_TEST(test_2d_area_triangle)
     coord_2d_t b;
     coord_2d_t c;
 
-    a.x = b.x = 0;
-    a.y = b.y = c.x = c.y = 1;
-    ck_assert(coord_2d_area_triangle(&a, &b, &c));  
+    a.x = b.x = a.y = 0;
+    b.y = c.x = c.y = 1;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 0);  
 }
 END_TEST
 
@@ -165,6 +166,9 @@ Suite* coord_2d_suite(void)
     Suite* s = suite_create("coord_2d");
 
     /* Setup Test Cases */
+    TCase* tc_2d_area_triangle = tcase_create("coord_2d_area_triangle");
+    tcase_add_test(tc_2d_area_triangle, test_2d_area_triangle);
+
     TCase* tc_2d_eq = tcase_create("coord_2d_eq");
     tcase_add_test(tc_2d_eq, test_2d_eq);
 
@@ -175,6 +179,7 @@ Suite* coord_2d_suite(void)
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
     /* Add Cases to Suite */
+    suite_add_tcase(s, tc_2d_area_triangle);
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
