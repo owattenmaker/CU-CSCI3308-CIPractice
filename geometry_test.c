@@ -14,6 +14,18 @@
 #include <check.h>
 
 #include "geometry.h"
+/* coord_2d area test */ 
+START_TEST(test_2d_area_triangle)
+{
+    coord_2d_t a;
+    coord_2d_t b;
+    coord_2d_t c;
+
+    a.x = b.x = 0;
+    a.y = b.y = c.x = c.y = 1;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c));  
+}
+END_TEST
 
 /* coord_2d_eq Test */
 START_TEST(test_2d_eq)
